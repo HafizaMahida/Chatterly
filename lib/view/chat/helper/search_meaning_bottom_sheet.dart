@@ -73,10 +73,13 @@ class _SearchMeaningBottomSheetState extends ConsumerState<SearchMeaningBottomSh
                Row(
                  crossAxisAlignment: CrossAxisAlignment.center,
                  children: [
-                   CommonText(
-                     title:chatWatch.searchMeaningResponseModel?.word??'',
-                     style:  TextStyles.bold.copyWith(
-                       fontSize: 22.sp,
+                   Flexible(
+                     child: CommonText(
+                       title:chatWatch.searchMeaningResponseModel?.word??'',
+                       style:  TextStyles.bold.copyWith(
+                         fontSize: 22.sp,
+                       ),
+                       maxLines: 5,
                      ),
                    ),
                    SizedBox(width: 8.w),

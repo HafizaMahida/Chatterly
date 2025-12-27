@@ -2,7 +2,6 @@
 class ApiEndPoints{
 
   /// Base url
-  static const baseUrl = 'https://dummyjson.com';
 
 
   static const int apiStatus_200 = 200; //success
@@ -22,7 +21,7 @@ class ApiEndPoints{
   // Endpoints
 
   /// receive message
-  static const receiveMessage = '/comments?limit=1';
+  static const receiveMessage = 'https://dummyjson.com/comments?limit=1';
 
   /// Search word meaning
   static searchMeaning(String input) =>'https://api.dictionaryapi.dev/api/v2/entries/en/$input';

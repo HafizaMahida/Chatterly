@@ -32,7 +32,15 @@ class UserListTile extends StatelessWidget {
           child: Row(
             children: [
               /// Avatar
-              Avatar(initial: user.initial),
+              Stack(
+                children: [
+                  Avatar(initial: user.initial),
+                  AppConstants.constant.getPresenceFromId(user.id) == 'Online'?Positioned(
+                    right: 3.w,
+                      bottom: 3,
+                      child: const _StatusDot(color: Colors.green)):const Offstage(),
+                ],
+              ),
 
               SizedBox(width: 12.w),
 
@@ -51,8 +59,6 @@ class UserListTile extends StatelessWidget {
                     Row(
                       children: [
                         if (AppConstants.constant.getPresenceFromId(user.id) == 'Online') ...[
-                          const _StatusDot(color: Colors.green),
-                          SizedBox(width: 6.w),
                           CommonText(
                             title: 'Online',
                             style: TextStyles.regular.copyWith(
@@ -91,8 +97,8 @@ class _StatusDot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 8.h,
-      height: 8.h,
+      width: 11.h,
+      height: 11.h,
       decoration: BoxDecoration(
         color: color,
         shape: BoxShape.circle,

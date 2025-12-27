@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
   final String initial;
-  const Avatar({super.key, required this.initial});
+  final Color? color;
+  const Avatar({super.key, required this.initial,this.color});
 
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 20,
-      backgroundColor: AppColors.brandYellow,
+      backgroundColor:color?? AppColors.brandYellow,
       child: CommonText(
         title:  initial,
         style: TextStyles.regular.copyWith(

@@ -1,4 +1,6 @@
 import 'package:chat_app/view/utils/theme/app_colors.dart';
+import 'package:chat_app/view/utils/theme/text_styles.dart';
+import 'package:chat_app/view/utils/widgets/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,10 +34,21 @@ class BottomNavBar extends ConsumerWidget {
                           onTap: (){
                             ref.read(homeController).updateSelectedIndex(index);
                           },
-                          child: Icon(
-                            homeWatch.bottomIconsList[index],
-                            size: 25.h,
-                            color: homeWatch.homeSelectedIndex == index?AppColors.brandYellowDark:AppColors.iconGray,
+                          child: Column(
+                            children: [
+                              Icon(
+                                homeWatch.bottomIconsList[index]['icons'],
+                                size: 25.h,
+                                color: homeWatch.homeSelectedIndex == index?AppColors.brandYellowDark:AppColors.iconGray,
+                              ),
+                              CommonText(
+                                title:homeWatch.bottomIconsList[index]['title'] ,
+                                style: TextStyles.regular.copyWith(
+                                  fontSize: 11.sp,
+                                  color: homeWatch.homeSelectedIndex == index?AppColors.brandYellowDark:AppColors.iconGray,
+                                ),
+                              )
+                            ],
                           ),
                         );
                       }),

@@ -56,11 +56,11 @@ class AppConstants {
     }
 
     if (diff.inMinutes < 60) {
-      return '${diff.inMinutes} min${diff.inMinutes > 1 ? 's' : ''}';
+      return '${diff.inMinutes} min${diff.inMinutes > 1 ? 's' : ''} ago';
     }
 
     if (diff.inHours < 24) {
-      return '${diff.inHours} hour${diff.inHours > 1 ? 's' : ''}';
+      return '${diff.inHours} hour${diff.inHours > 1 ? 's' : ''} ago';
     }
 
     if (diff.inDays == 1) {
@@ -68,7 +68,7 @@ class AppConstants {
     }
 
     if (diff.inDays < 7) {
-      return '${diff.inDays} days';
+      return '${diff.inDays} days ago';
     }
 
     // Older than a week → show date
@@ -90,8 +90,7 @@ class AppConstants {
   String getPresenceFromId(String? id) {
     if (id == null) return '';
 
-    final createdTime =
-    DateTime.fromMillisecondsSinceEpoch(int.parse(id));
+    final createdTime = DateTime.fromMillisecondsSinceEpoch(int.parse(id));
 
     final diff = DateTime.now().difference(createdTime);
 
@@ -101,4 +100,10 @@ class AppConstants {
     return formatChatTime(createdTime);
   }
 
+  String formatTime(DateTime dt) {
+    int hour = dt.hour % 12 == 0 ? 12 : dt.hour % 12;
+    String minute = dt.minute.toString().padLeft(2, '0');
+    String period = dt.hour >= 12 ? 'PM' : 'AM';
+    return '$hour:$minute $period';
+  }
 }

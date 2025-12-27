@@ -45,7 +45,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         ),
         child: Column(
           children: [
-            Expanded(child: MessageList()),
+            Expanded(child: MessageList(userInitial: widget.user.initial??'',)),
             MessageInput(userId:widget.user.id??''),
           ],
         ),
@@ -72,10 +72,11 @@ class _ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
             Navigator.of(context).pop();
             ref.read(usersController).loadUsers();
           },
-          child: Icon(Icons.arrow_back_sharp,color: AppColors.black,)
+          child: Padding(padding:EdgeInsets.only(left: 7.w),child: Icon(Icons.arrow_back_sharp,color: AppColors.black,))
       ),
       title: Row(
         children: [
+          SizedBox(width: 5.w),
           CircleAvatar(
             radius: 18,
             backgroundColor: AppColors.brandYellowDark,

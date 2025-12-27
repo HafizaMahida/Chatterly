@@ -30,10 +30,20 @@ class HomeController extends ChangeNotifier{
     notifyListeners();
   }
 
-  List<IconData> bottomIconsList =[
-    Icons.home,
-    Icons.local_offer_sharp,
-    Icons.settings,
+  List<Map<String,dynamic>> bottomIconsList =[
+    {
+      'icons':Icons.home,
+      'title':'Home',
+    },
+    {
+      'icons':Icons.local_offer_sharp,
+      'title':'Offers',
+    },
+    {
+      'icons':Icons.settings,
+      'title':'Settings',
+    },
+
   ];
 
 
