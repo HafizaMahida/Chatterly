@@ -1,3 +1,4 @@
+import 'package:chat_app/view/home/home_screen.dart';
 import 'package:chat_app/view/utils/widgets/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,9 +18,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 3), () async {
-      // if(context.mounted){
-      //   Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>HomeScreen()));
-      // }
+      if(context.mounted){
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>HomeScreen()));
+      }
     });
     super.initState();
   }
