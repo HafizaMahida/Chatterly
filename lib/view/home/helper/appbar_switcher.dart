@@ -5,6 +5,7 @@ import 'package:chat_app/view_model/home/home_controller.dart';
 import 'package:chat_app/view_model/users/users_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppbarSwitcher extends ConsumerWidget {
   const AppbarSwitcher({super.key});
@@ -13,11 +14,11 @@ class AppbarSwitcher extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final homeWatch = ref.watch(homeController);
     return Container(
-      height: 36,
-      padding: const EdgeInsets.all(4),
+      height: 36.h,
+      padding: EdgeInsets.all(4.h),
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(18.r),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
