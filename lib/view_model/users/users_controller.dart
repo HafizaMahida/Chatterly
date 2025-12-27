@@ -43,5 +43,12 @@ class UsersController extends ChangeNotifier{
     userNameCtr.clear();
   }
 
+  /// update local list user
+  void updateLocalListUser(String oldId, UserModel updatedUser ){
+    final userIndex = userList.indexWhere((u) => u.id == oldId);
+    userList[userIndex]= updatedUser;
+    notifyListeners();
+  }
+
 }
 
