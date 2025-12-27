@@ -50,4 +50,8 @@ https://plugins.jetbrains.com/plugin/6351-dart
 Submission Information
 All of the points mentioned in assignment is completed.
 
+Note:
+Online status will not visible after 5 mins of in-activity. Instead of it, you can se time. 
+Un read message badge is static.
+
 Apk link: https://drive.google.com/file/d/13yElCx36jjkk88nQck7bwdEeEt6tZr-R/view?usp=sharing
