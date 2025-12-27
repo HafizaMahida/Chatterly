@@ -4,6 +4,7 @@ import 'package:chat_app/data/local/session.dart';
 import 'package:chat_app/data/network/dio/api_client.dart';
 import 'package:chat_app/data/repository/chat/model/chat_model.dart';
 import 'package:chat_app/data/repository/chat/model/receiver_message_response_model.dart';
+import 'package:chat_app/data/repository/chat/model/search_meaning_response_model.dart';
 import 'package:chat_app/data/repository/chat/repo/chat_repository.dart';
 import 'package:chat_app/data/repository/users/user_model.dart';
 import 'package:chat_app/view/utils/const/app_constants.dart';
@@ -97,8 +98,11 @@ class ChatController extends ChangeNotifier{
   }
 
   bool isLoading = false;
+  bool isSearchLoading = false;
 
   ReceiverMessageResponseModel? receiverMessageResponseModel;
+  List<SearchMeaningResponseModel>? listSearchMeaningResponseModel;
+  SearchMeaningResponseModel? searchMeaningResponseModel;
 
 
 
@@ -159,4 +163,41 @@ class ChatController extends ChangeNotifier{
       notifyListeners();
     }
   }
+
+
+  /// Search word meaning api
+  Future<void> searchWordMeaningApi(String word,) async {
+    listSearchMeaningResponseModel = [];
+    searchMeaningResponseModel = null;
+    isSearchLoading = true;
+    notifyListeners();
+
+    try {
+      final List<SearchMeaningResponseModel> response = await chatRepository.searchWordMeaningApi(word);
+
+      if (response.isEmpty) {
+        searchMeaningResponseModel = SearchMeaningResponseModel(
+          word: word,
+          isFound: false,
+        );
+        print("response");
+        return;
+      }
+      searchMeaningResponseModel = response.first;
+      isSearchLoading = false;
+      notifyListeners();
+    } on FormatException catch (e) {
+      AppConstants.constant.showLog('Dictionary: ${e.message}');
+    }  catch (e) {
+      searchMeaningResponseModel = SearchMeaningResponseModel(
+        word: word,
+        isFound: false,
+      );
+    } finally {
+      isSearchLoading = false;
+      notifyListeners();
+    }
+  }
+
 }
+

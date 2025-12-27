@@ -1,4 +1,5 @@
 import 'package:chat_app/view/splash/splash_screen.dart';
+import 'package:chat_app/view/utils/const/app_constants.dart';
 import 'package:chat_app/view/utils/theme/theme_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
     minTextAdapt: true,
     splitScreenMode: true,
       child: MaterialApp(
+        navigatorKey: AppConstants.navigatorKey,
         title: 'Flutter Demo',
         theme: ThemeStyle.themeData(context),
         home: SplashScreen(),

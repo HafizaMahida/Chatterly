@@ -1,32 +1,33 @@
+// To parse this JSON data, do
+//
+//     final commonErrorModel = commonErrorModelFromJson(jsonString);
+
+import 'dart:convert';
+
+CommonErrorModel commonErrorModelFromJson(String str) => CommonErrorModel.fromJson(json.decode(str));
+
+String commonErrorModelToJson(CommonErrorModel data) => json.encode(data.toJson());
+
 class CommonErrorModel {
-  String? error;
-  int? statusCode;
+  String? title;
   String? message;
-  List<String>? messages;
+  String? resolution;
 
   CommonErrorModel({
+    this.title,
     this.message,
-    this.messages,
-    this.error,
-    this.statusCode,
+    this.resolution,
   });
 
-  factory CommonErrorModel.fromJson(Map<String, dynamic> json) {
-    final msg = json["message"];
-
-    return CommonErrorModel(
-      message: msg is String ? msg : null,
-      messages: msg is List ? msg.map((e) => e.toString()).toList() : null,
-      error: json["error"]?.toString(),
-      statusCode: json["statusCode"],
-    );
-  }
+  factory CommonErrorModel.fromJson(Map<String, dynamic> json) => CommonErrorModel(
+    title: json["title"],
+    message: json["message"],
+    resolution: json["resolution"],
+  );
 
   Map<String, dynamic> toJson() => {
-    "message": message ?? messages,
-    "error": error,
-    "statusCode": statusCode,
+    "title": title,
+    "message": message,
+    "resolution": resolution,
   };
-
-  String get errorMessage => message ?? messages?.join(", ") ?? "";
 }

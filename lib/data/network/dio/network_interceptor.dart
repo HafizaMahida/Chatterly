@@ -21,44 +21,38 @@ InterceptorsWrapper networkInterceptor(Dio client) {
       handler.next(response);
     },
 
-    onError: (error, handler) async {
-    final response = error.response;
-    AppConstants.constant.showLog('Error response: ${error.response}');
+      onError: (DioException error, handler) async {
+        final response = error.response;
+        AppConstants.constant.showLog('Error response: ${response?.data}');
 
-    try {
-      if (response == null) {
-        showErrorDialog(
-          error.type == DioExceptionType.connectionError
-              ? 'Connectivity issue. Check your network!'
-              : error.type == DioExceptionType.connectionTimeout
-              ? 'Connection Timeout!'
-              : 'Network error occurred',
-          dismissible: true,
-        );
-        handler.reject(error);
-        return;
+        if (response == null) {
+          showErrorDialog(
+            error.type == DioExceptionType.connectionError
+                ? 'Connectivity issue. Check your network!'
+                : error.type == DioExceptionType.connectionTimeout
+                ? 'Connection Timeout!'
+                : 'Network error occurred',
+            dismissible: true,
+          );
+          handler.reject(error);
+          return;
+        }
+
+        try {
+          final commonModel = CommonErrorModel.fromJson(response.data);
+
+          showErrorDialog(
+            commonModel.message??
+                "Unexpected error",
+            dismissible: true,
+          );
+
+          handler.reject(error);
+        } catch (e) {
+          showErrorDialog("Something went wrong", dismissible: true);
+          handler.reject(error);
+        }
       }
 
-      /// Parse common error model
-      CommonErrorModel commonModel = CommonErrorModel.fromJson(jsonDecode(response.toString()));
-
-      final statusCode = commonModel.statusCode;
-
-      /// -------------------------------
-      ///      OTHER STATUSES
-      /// -------------------------------
-      showErrorDialog(commonModel.message ?? commonModel.messages?.join(", ") ?? "Unexpected error", dismissible: true,);
-      handler.reject(error);
-      return;
-    } catch (e) {
-      showErrorDialog("Something went wrong: $e", dismissible: true);
-      handler.reject(
-        DioException(
-          requestOptions: response?.requestOptions ?? error.requestOptions,
-          response: response,
-        ),
-      );
-    }
-  },
   );
 }

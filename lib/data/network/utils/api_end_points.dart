@@ -21,8 +21,12 @@ class ApiEndPoints{
 
   // Endpoints
 
-  /// Auth
+  /// receive message
   static const receiveMessage = '/comments?limit=1';
+
+  /// Search word meaning
+  static searchMeaning(String input) =>'https://api.dictionaryapi.dev/api/v2/entries/en/$input';
+
 
 
 

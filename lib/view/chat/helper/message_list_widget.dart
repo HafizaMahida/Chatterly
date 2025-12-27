@@ -1,5 +1,7 @@
+import 'package:chat_app/view/chat/helper/word_selectable_text.dart';
 import 'package:chat_app/view/utils/const/app_enums.dart';
 import 'package:chat_app/view/utils/theme/app_colors.dart';
+import 'package:chat_app/view/utils/theme/text_styles.dart';
 import 'package:chat_app/view/utils/widgets/common_text.dart';
 import 'package:chat_app/view_model/chat/chat_controller.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +70,10 @@ class _SenderBubble extends StatelessWidget {
             bottomRight: Radius.circular(12.r),
           )
         ),
-        child: CommonText(title:text),
+        child:  WordSelectableText(
+          text: text,
+          style: TextStyles.regular.copyWith(color: AppColors.black),
+        ),
       ),
     );
   }
@@ -95,7 +100,10 @@ class _ReceiverBubble extends StatelessWidget {
             bottomRight: Radius.circular(12.r),
           )
         ),
-        child: Text(text),
+        child: WordSelectableText(
+          text: text,
+          style: TextStyles.regular.copyWith(color: AppColors.black),
+        ),
       ),
     );
   }

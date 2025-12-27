@@ -1,3 +1,6 @@
+import 'package:chat_app/view/utils/theme/app_colors.dart';
+import 'package:chat_app/view/utils/theme/text_styles.dart';
+import 'package:chat_app/view/utils/widgets/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/view/utils/const/app_constants.dart';
 
@@ -8,6 +11,7 @@ void showErrorDialog(String message, {bool dismissible = true,Function()? onTap}
       context: AppConstants.navigatorKey.currentContext!,
       barrierDismissible: dismissible,
       builder: (_) => AlertDialog(
+        backgroundColor: AppColors.primary,
         title: const Text("Error"),
         content: Text(message),
         actions: [
@@ -19,7 +23,7 @@ void showErrorDialog(String message, {bool dismissible = true,Function()? onTap}
                 Navigator.pop(AppConstants.navigatorKey.currentContext!);
               }
             },
-            child: const Text("OK"),
+            child: CommonText(title: "OK",style: TextStyles.regular.copyWith(color: AppColors.black),),
           ),
         ],
       ),
