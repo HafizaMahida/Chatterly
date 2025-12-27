@@ -22,11 +22,23 @@ void showAddUserBottomSheet(BuildContext context) {
   );
 }
 
-class AddUserWidget extends ConsumerWidget {
+
+class AddUserWidget extends ConsumerStatefulWidget {
   const AddUserWidget({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  ConsumerState<AddUserWidget> createState() => _AddUserWidgetState();
+}
+
+class _AddUserWidgetState extends ConsumerState<AddUserWidget> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ref.read(usersController).clearAddUserCtr();
+  }
+  @override
+  Widget build(BuildContext context) {
     final userRead= ref.read(usersController);
     return Padding(
       padding: EdgeInsets.only(
@@ -40,7 +52,7 @@ class AddUserWidget extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CommonText(
-           title: 'Add New User',
+            title: 'Add New User',
             style: TextStyles.medium.copyWith(
               fontSize: 16.sp,
             ),
@@ -64,7 +76,6 @@ class AddUserWidget extends ConsumerWidget {
                   label: 'Cancel',
                   backgroundColor: AppColors.errorColor.withValues(alpha: 0.3),
                   onPressed: () {
-                    userRead.clearAddUserCtr();
                     Navigator.pop(context);
                   },
                 ),
@@ -85,7 +96,6 @@ class AddUserWidget extends ConsumerWidget {
                         backgroundColor: AppColors.black.withValues(alpha: 0.9),
                       ),
                     );
-                    userRead.clearAddUserCtr();
                   },
                 ),
               ),
@@ -96,4 +106,7 @@ class AddUserWidget extends ConsumerWidget {
     );
   }
 }
+
+
+
 

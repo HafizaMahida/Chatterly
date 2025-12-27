@@ -28,7 +28,7 @@ class MessageInput extends ConsumerWidget {
               child: IconButton(
                 icon: const Icon(Icons.send, color: Colors.white),
                 onPressed: () {
-                  chatRead.sendMessage(userId);
+                  chatRead.sendMessage();
                 },
               ),
             ),

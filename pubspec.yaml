@@ -64,7 +64,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/fonts/
-    - assets/svgs/
     - assets/images/
   fonts:
     - family: Outfit

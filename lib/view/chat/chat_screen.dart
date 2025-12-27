@@ -26,6 +26,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    ref.read(chatController).disposeController();
     SchedulerBinding.instance.addPostFrameCallback((callback)async{
       await ref.read(chatController).addChatToList(widget.user.id??'');
     });

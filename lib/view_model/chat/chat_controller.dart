@@ -11,6 +11,12 @@ import 'package:flutter_riverpod/legacy.dart';
 final chatController = ChangeNotifierProvider((ref) => ChatController());
 class ChatController extends ChangeNotifier{
 
+  void disposeController(){
+    chatCtr.clear();
+    userChat = [];
+    chatUser = null;
+  }
+
   final storage = UserLocalStorage();
 
   TextEditingController chatCtr = TextEditingController();
@@ -31,9 +37,9 @@ class ChatController extends ChangeNotifier{
   }
 
   /// Send message
-  Future<void> sendMessage(String userId) async {
+  Future<void> sendMessage() async {
     final users = await storage.getUsers();
-    final userIndex = users.indexWhere((u) => u.id == userId);
+    final userIndex = users.indexWhere((u) => u.id == chatUser?.id);
     if (userIndex == -1) return;
 
     final ChatMessage message = ChatMessage(
@@ -63,7 +69,7 @@ class ChatController extends ChangeNotifier{
     notifyListeners();
 
     /// Receiver message
-    await getReceiverMessage(userId);
+    await getReceiverMessage(chatUser?.id??'');
   }
 
   bool isLoading = false;
